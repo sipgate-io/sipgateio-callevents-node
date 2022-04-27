@@ -13,8 +13,8 @@ function handleNewCall(request, response) {
 }
 
 function handleOnAnswer(request, response) {
-	const { from: caller, user: calleeName } = request.body;
-	console.log(`${calleeName} answered call from ${caller}`);
+	const { from: caller, to: callee } = request.body;
+	console.log(`${callee} answered call from ${caller}`);
 	response.end();
 }
 
