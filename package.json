@@ -10,7 +10,7 @@
   "author": "sipgate.io Team <io-team@sipgate.de>",
   "repository": "https://github.com/sipgate-io/sipgateio-callevents-node",
   "engines": {
-    "node": "10.15.3"
+    "node": ">=16.0.0"
   },
   "license": "Unlicense",
   "dependencies": {
