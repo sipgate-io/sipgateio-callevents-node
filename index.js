@@ -1,7 +1,9 @@
 const express = require('express');
 
-const PORT = 8080;
-const BASE_URL = '[YOUR_SERVERS_ADDRESS]';
+require("dotenv").config();
+
+const WEBHOOK_PORT = process.env.WEBHOOK_PORT;
+const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 function handleNewCall(request, response) {
 	const { from: caller, to: calleeNumber } = request.body;
@@ -9,7 +11,7 @@ function handleNewCall(request, response) {
 	console.log(`New call from ${caller} to ${calleeNumber} is ringing...`);
 
 	response.set('Content-Type', 'application/xml');
-	response.send(`<Response onAnswer="${BASE_URL}/on-answer" onHangup="${BASE_URL}/on-hangup" />`);
+	response.send(`<Response onAnswer="${WEBHOOK_URL}/on-answer" onHangup="${WEBHOOK_URL}/on-hangup" />`);
 }
 
 function handleOnAnswer(request, response) {
@@ -30,6 +32,6 @@ app.post('/new-call', handleNewCall);
 app.post('/on-answer', handleOnAnswer);
 app.post('/on-hangup', handleOnHangup);
 
-app.listen(PORT, () => {
-	console.log(`Server listening on: http://localhost:${PORT}`);
+app.listen(WEBHOOK_PORT, () => {
+	console.log(`Server listening on: http://localhost:${WEBHOOK_PORT}`);
 });

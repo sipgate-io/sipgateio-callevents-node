@@ -104,6 +104,9 @@ Navigate to the project's root directory and run:
 npm install
 ```
 
+## Configuration
+
+Create the `.env` by copying the [`.env.example`](.env.example) and set the values according to the comment above the variables. For more information read [Configure webhooks for sipgate.io](#configure-webhooks-for-sipgateio) and [Making your computer accessible from the internet](#making-your-computer-accessible-from-the-internet).
 
 ## Execution
 Navigate to the project's root directory.
@@ -125,7 +128,7 @@ function handleNewCall(request, response) {
 	console.log(`New call from ${caller} to ${calleeNumber} is ringing...`);
 
 	response.set('Content-Type', 'application/xml');
-	response.send(`<Response onAnswer="${BASE_URL}/on-answer" onHangup="${BASE_URL}/on-hangup" />`);
+	response.send(`<Response onAnswer="${WEBHOOK_URL}/on-answer" onHangup="${WEBHOOK_URL}/on-hangup" />`);
 }
 ```
 
@@ -169,8 +172,8 @@ In order to register the previously defined callback functions on the `app` inst
 For example, the address `https://your.server-address.com/new-call` will be mapped to the `handleNewCall` function.
 
 ```javascript
-app.listen(PORT, () => {
-	console.log(`Server listening on: http://localhost:${PORT}`);
+app.listen(WEBHOOK_PORT, () => {
+	console.log(`Server listening on: http://localhost:${WEBHOOK_PORT}`);
 });
 ```
 
